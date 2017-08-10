@@ -16,6 +16,7 @@ composer install
 ### Run pre-configured MySQL5.7 server (Docker required):
 
 docker-compose up -d
+
 docker-compose down
 
 See docker-compose.yml for information.
