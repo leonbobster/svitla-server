@@ -3,7 +3,7 @@ Trial task for Svitla
 
 # Installation.
 
-* Clone repository:
+## Clone repository:
 
 git clone git@github.com:leonbobster/svitla-server.git
 
