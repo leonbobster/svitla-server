@@ -1,6 +1,9 @@
 imports:
     - { resource: config.yml }
 
+framework:
+  test: ~
+
 doctrine:
     dbal:
         host:     127.0.0.1:3366
