@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Course;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,19 +42,17 @@ class UserController extends FOSRestController
     {
         $body = json_decode($request->getContent(), true);
         $courseId = $body['courses'][0]['id']; /* yes I know, it's too optimistic */
-        /** @var Course $course */
-        $course = $this->getDoctrine()
-            ->getRepository('AppBundle:Course')
-            ->find($courseId);
+
+        $em = $this->getDoctrine()->getManager();
+        $course = $em->getReference('AppBundle:Course', $courseId);
         /** @var User $user */
-        $user = $this->getDoctrine()
-            ->getRepository('AppBundle:User')
-            ->find($id);
+        $user = $em->getReference('AppBundle:User', $id);
+
         if ($user->enroll($course)) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
         }
+
         return $user;
     }
 }
