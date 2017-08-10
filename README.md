@@ -13,9 +13,10 @@ cd svitla-server
 
 composer install
 
-### Run pre-configured MySQL5.7 server:
+### Run pre-configured MySQL5.7 server (Docker required):
 
 docker-compose up -d
+docker-compose down
 
 See docker-compose.yml for information.
 You can find my.ini config file with trivial tuning in /db/config.
