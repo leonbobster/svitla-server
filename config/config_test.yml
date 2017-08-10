@@ -1,0 +1,9 @@
+imports:
+    - { resource: config.yml }
+
+doctrine:
+    dbal:
+        host:     127.0.0.1:3366
+        dbname:   testdb
+        user:     root
+        password: 1
