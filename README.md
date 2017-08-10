@@ -34,5 +34,6 @@ php bin/console app:generate-fake-data
 ./vendor/bin/phpunit tests/
 
 ### Run web-server:
+cd public/
 
 php -S localhost:8095
