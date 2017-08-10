@@ -12,8 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
-// configuration
-$env = 'test';
+$input = new ArgvInput();
+
+//Determine Environment
+$env = $input->getParameterOption(['--env', '-e'], getenv('APP_ENV') ?: 'dev');
+
 $debug = true;
 
 $input = new ArgvInput();
