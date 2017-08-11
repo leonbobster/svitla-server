@@ -37,7 +37,7 @@ class CourseController extends FOSRestController
      */
     public function getAllAction(Request $request): array
     {
-        $order = $request->get('order');
+        $order = $request->get('order', ['course.id' => 'ASC']);
         $limit = $request->get('limit');
         $offset = $request->get('offset');
         $criteria = [];
