@@ -45,6 +45,16 @@ class Course
     private $startsOn;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="courses", fetch="EXTRA_LAZY")
+     * @ORM\JoinTable(
+     *     name="user_course",
+     *     joinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
+     */
+    private $users;
+
+    /**
      * Course constructor.
      *
      * @param int|null               $id

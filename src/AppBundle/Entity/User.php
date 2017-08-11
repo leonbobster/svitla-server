@@ -29,11 +29,11 @@ class User
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Course")
+     * @ORM\ManyToMany(targetEntity="Course", inversedBy="users")
      * @ORM\JoinTable(
-     *      name="user_course",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")}
+     *     name="user_course",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="course_id", referencedColumnName="id")}
      * )
      */
     private $courses;

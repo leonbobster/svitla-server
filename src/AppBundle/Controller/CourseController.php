@@ -41,14 +41,15 @@ class CourseController extends FOSRestController
         $limit = $request->get('limit');
         $offset = $request->get('offset');
         $criteria = [];
+        $userId = 1; /* should receive from Auth service */
 
         $qb = $this->courseRepository()->createQueryBuilder('course');
-        $items = $qb->leftJoin('course.professor', 'professor')
+        $q = $qb->leftJoin('course.professor', 'professor')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->orderBy(key($order), $order[key($order)])
-            ->getQuery()
-            ->execute();
+            ->getQuery();
+        $items = $q->execute();
 
         $total = $this->courseRepository()->countBy($criteria);
 
