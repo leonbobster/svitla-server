@@ -14,16 +14,13 @@ class CourseController extends FOSRestController
     /**
      * @Rest\Get("/course/{id}")
      *
-     * @param Request  $request
-     * @param int|null $id
+     * @param int $id
      *
      * @return array|View|null|object
      */
-    public function getAction(Request $request, int $id = null)
+    public function getOneAction(int $id)
     {
-        $result = $id
-            ? $this->getOne($id)
-            : $this->getAll($request);
+        $result = $this->courseRepository()->find($id);
         if ($result === null) {
             return new View("there are no courses exist", Response::HTTP_NOT_FOUND);
         }
@@ -32,21 +29,28 @@ class CourseController extends FOSRestController
     }
 
     /**
+     * @Rest\Get("/course")
+     *
      * @param Request $request
      *
      * @return array
      */
-    private function getAll(Request $request): array
+    public function getAllAction(Request $request): array
     {
         $order = $request->get('order');
         $limit = $request->get('limit');
         $offset = $request->get('offset');
         $criteria = [];
 
-        /** @var CourseRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Course');
-        $items = $repository->findBy($criteria, $order, $limit, $offset);
-        $total = $repository->countBy($criteria);
+        $qb = $this->courseRepository()->createQueryBuilder('course');
+        $items = $qb->leftJoin('course.professor', 'professor')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->orderBy(key($order), $order[key($order)])
+            ->getQuery()
+            ->execute();
+
+        $total = $this->courseRepository()->countBy($criteria);
 
         return [
             'total' => $total,
@@ -55,14 +59,10 @@ class CourseController extends FOSRestController
     }
 
     /**
-     * @param int $id
-     *
-     * @return null|object
+     * @return CourseRepository
      */
-    private function getOne(int $id)
+    private function courseRepository()
     {
-        return $this->getDoctrine()
-            ->getRepository('AppBundle:Course')
-            ->find($id);
+        return $this->getDoctrine()->getRepository('AppBundle:Course');
     }
 }
