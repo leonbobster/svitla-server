@@ -31,22 +31,19 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Put("/user/{id}")
+     * @Rest\Put("/user/{userId}/enroll/{courseId}")
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $userId
+     * @param int $courseId
      *
      * @return User
      */
-    public function updateAction(Request $request, int $id)
+    public function enrollAction(int $userId, int $courseId)
     {
-        $body = json_decode($request->getContent(), true);
-        $courseId = $body['courses'][0]['id']; /* yes I know, it's too optimistic */
-
         $em = $this->getDoctrine()->getManager();
         $course = $em->getReference('AppBundle:Course', $courseId);
         /** @var User $user */
-        $user = $em->getReference('AppBundle:User', $id);
+        $user = $em->getReference('AppBundle:User', $userId);
 
         if ($user->enroll($course)) {
             $em->persist($user);
