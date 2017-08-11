@@ -3,6 +3,17 @@ Trial task for Svitla
 
 PHP7, Symfony3.3 micro-kernel, FOSRestBundle, Doctrine2.5, JMSSerializerBundle, PHPUnit6.3
 
+Bundle: https://github.com/leonbobster/svitla-server/tree/master/src/AppBundle
+
+Tests: https://github.com/leonbobster/svitla-server/tree/master/tests/AppBundle
+
+Db:
+
+https://github.com/leonbobster/svitla-server/blob/master/db/config/my.ini
+
+https://github.com/leonbobster/svitla-server/blob/master/docker-compose.yml
+
+
 # Installation
 
 ### Clone repository:
