@@ -1,9 +1,9 @@
 # svitla-server
 Trial task for Svitla
 
-PHP7, Symfony3.3 micro-kernel, FOSRestBundle, Doctrine2.4, JMSSerializerBundle, PHPUnit6.3
+PHP7, Symfony3.3 micro-kernel, FOSRestBundle, Doctrine2.5, JMSSerializerBundle, PHPUnit6.3
 
-# Installation.
+# Installation
 
 ### Clone repository:
 
